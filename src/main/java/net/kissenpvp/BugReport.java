@@ -3,6 +3,7 @@ package net.kissenpvp;
 import net.kissenpvp.commands.BugReportNode;
 import net.kissenpvp.commands.PlayerReportNode;
 import net.kissenpvp.commands.bug.BugReportCommand;
+import net.kissenpvp.commands.bug.DeleteBugReportCommand;
 import net.kissenpvp.commands.bug.ListBugReport;
 import net.kissenpvp.commands.bug.SubmitBugCommand;
 import net.kissenpvp.commands.player.DeletePlayerReportCommand;
@@ -41,7 +42,7 @@ public class BugReport extends JavaPlugin {
         this.bugReports = getTable().registerMeta(this).getCollection("bug_list", BugReportNode.class).join();
         this.playerReports = getTable().registerMeta(this).getCollection("playerreport_list", PlayerReportNode.class).join();
         PluginManager pluginManager = Bukkit.getPluginManager();
-        pluginManager.registerCommand(this, new BugReportCommand(), new SubmitBugCommand(), new ListBugReport());
+        pluginManager.registerCommand(this, new BugReportCommand(), new SubmitBugCommand(), new ListBugReport(), new DeleteBugReportCommand());
         pluginManager.registerCommand(this, new ListPlayerReports(), new PlayerReportCommand(), new SubmitPlayerReportCommand(), new DeletePlayerReportCommand());
         registerTranslations(pluginManager);
     }
@@ -103,6 +104,9 @@ public class BugReport extends JavaPlugin {
         pluginManager.registerTranslation("server.bugreport.list.empty", new MessageFormat("The bug report list is empty"), this);
         pluginManager.registerTranslation("server.bug.list.compact", new MessageFormat("[{0}] [{1}] {2}"), this);
         pluginManager.registerTranslation("server.player.submit.success", new MessageFormat("Successfully submitted a player report"), this);
+        pluginManager.registerTranslation("server.bugreport.delete.success", new MessageFormat("Successfully deleted the bug report with the ID: {0}"), this);
+        pluginManager.registerTranslation("server.bugreport.delete.notfound", new MessageFormat("No bug report found with the ID: {0}"), this);
+
 
         pluginManager.registerTranslation("server.playerreport.create.success", new MessageFormat("Successfully submitted a player report"), this);
         pluginManager.registerTranslation("server.playerreport.update.success", new MessageFormat("Successfully updated the player report with the ID: {0}"), this);
